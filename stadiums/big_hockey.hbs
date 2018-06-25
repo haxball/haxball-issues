@@ -1,0 +1,87 @@
+{
+	"name" : "Big Hockey",
+	
+	"width" : 600,
+	"height" : 270,
+	
+	"spawnDistance" : 280,
+	
+	"bg" : { "type" : "hockey", "width" : 550, "height" : 240, "kickOffRadius" : 75, "cornerRadius" : 150, "goalLine" : 160 },
+
+	"vertexes" : [
+		{ "x" : 0, "y" :  270, "trait" : "kickOffBarrier" },
+		{ "x" : 0, "y" :   75, "trait" : "kickOffBarrier" },
+		{ "x" : 0, "y" :  -75, "trait" : "kickOffBarrier" },
+		{ "x" : 0, "y" : -270, "trait" : "kickOffBarrier" },
+		
+		{ "x" : -400, "y" : -90, "trait" : "goalNet" },
+		{ "x" : -420, "y" : -70, "trait" : "goalNet" },
+		{ "x" : -420, "y" :  70, "trait" : "goalNet" },
+		{ "x" : -400, "y" :  90, "trait" : "goalNet" },
+		
+		{ "x" : 400, "y" : -90, "trait" : "goalNet" },
+		{ "x" : 420, "y" : -70, "trait" : "goalNet" },
+		{ "x" : 420, "y" :  70, "trait" : "goalNet" },
+		{ "x" : 400, "y" :  90, "trait" : "goalNet" },
+		
+		{ "x" : -400, "y" : -240,  "trait" : "ballArea" },
+		{ "x" : -550, "y" :  -90,  "trait" : "ballArea" },
+		{ "x" : -550, "y" :   90,  "trait" : "ballArea" },
+		{ "x" : -400, "y" :  240,  "trait" : "ballArea" },
+		
+		{ "x" : 400, "y" : -240,  "trait" : "ballArea" },
+		{ "x" : 550, "y" :  -90,  "trait" : "ballArea" },
+		{ "x" : 550, "y" :   90,  "trait" : "ballArea" },
+		{ "x" : 400, "y" :  240,  "trait" : "ballArea" }
+	],
+	
+	"segments" : [
+		{ "v0" : 0, "v1" : 1, "trait" : "kickOffBarrier" },
+		{ "v0" : 1, "v1" : 2, "trait" : "kickOffBarrier", "curve" : 180, "cGroup" : ["blueKO"] },
+		{ "v0" : 1, "v1" : 2, "trait" : "kickOffBarrier", "curve" : -180, "cGroup" : ["redKO"] },
+		{ "v0" : 2, "v1" : 3, "trait" : "kickOffBarrier" },
+		
+		{ "v0" : 4, "v1" : 5, "trait" : "goalNet", "curve" : -90 },
+		{ "v0" : 5, "v1" : 6, "trait" : "goalNet" },
+		{ "v0" : 6, "v1" : 7, "trait" : "goalNet", "curve" : -90 },
+		
+		{ "v0" : 8, "v1" : 9, "trait" : "goalNet", "curve" : 90 },
+		{ "v0" : 9, "v1" : 10, "trait" : "goalNet" },
+		{ "v0" : 10, "v1" : 11, "trait" : "goalNet", "curve" : 90 },
+		
+		{ "v0" : 12, "v1" : 13, "trait" : "ballArea", "curve" : -90 },
+		{ "v0" : 14, "v1" : 15, "trait" : "ballArea", "curve" : -90 },
+		{ "v0" : 16, "v1" : 17, "trait" : "ballArea", "curve" : 90 },
+		{ "v0" : 18, "v1" : 19, "trait" : "ballArea", "curve" : 90 }
+	],
+	
+	"goals" : [
+		{ "p0" : [-390, 90], "p1" : [-390,-90], "team" : "red" },
+		{ "p0" : [390, 90], "p1" : [390,-90], "team" : "blue" }
+	],
+	
+	"discs" : [
+		{ "pos" : [-390,  90], "trait" : "goalPost", "color" : "FFCCCC" },
+		{ "pos" : [-390, -90], "trait" : "goalPost", "color" : "FFCCCC" },
+		{ "pos" : [ 390,  90], "trait" : "goalPost", "color" : "CCCCFF" },
+		{ "pos" : [ 390, -90], "trait" : "goalPost", "color" : "CCCCFF" }
+	],
+	
+	"planes" : [
+		{ "normal" : [0, 1], "dist" : -240, "trait" : "ballArea" },
+		{ "normal" : [0,-1], "dist" : -240, "trait" : "ballArea" },
+		{ "normal" : [ 1,0], "dist" : -550, "trait" : "ballArea" },
+		{ "normal" : [-1,0], "dist" : -550, "trait" : "ballArea" },
+		{ "normal" : [ 0, 1], "dist" : -270, "bCoef" : 0.1 },
+		{ "normal" : [ 0,-1], "dist" : -270, "bCoef" : 0.1 },
+		{ "normal" : [ 1, 0], "dist" : -600, "bCoef" : 0.1 },
+		{ "normal" : [-1, 0], "dist" : -600, "bCoef" : 0.1 }
+	],
+	
+	"traits" : {
+		"ballArea" : { "vis" : false, "bCoef" : 1, "cMask" : ["ball"] },
+		"goalPost" : { "radius" : 8, "invMass" : 0, "bCoef" : 0.5 },
+		"goalNet" : { "vis" : true, "bCoef" : 0.1, "cMask" : ["all"] }, 
+		"kickOffBarrier" : { "vis" : false, "bCoef" : 0.1, "cGroup" : ["redKO", "blueKO"], "cMask" : ["red", "blue"] }
+	}
+}
