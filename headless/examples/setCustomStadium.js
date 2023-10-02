@@ -1,7 +1,7 @@
 
 // Here I'm using javascript multiline template string literals (enclosed by ``)
 // Otherwise one would need to remove the newline characters and escape the quotes as \"
-var stadiumFileText = `{
+const stadiumFileText = `{
 	"name" : "Simple",
 	
 	"width" : 450,
@@ -70,5 +70,5 @@ var stadiumFileText = `{
 	}
 }`
 
-var room = HBInit({});
+const room = HBInit({});
 room.setCustomStadium(stadiumFileText);

@@ -1,42 +1,42 @@
 // This room script will notify every time a player touches the ball
 
-var room = HBInit({});
+const room = HBInit({});
 
-var playersThatTouchedTheBall = new Set();
+const playersThatTouchedTheBall = new Set();
 
 function pointDistance(p1, p2) {
-	var d1 = p1.x - p2.x;
-	var d2 = p1.y - p2.y;
+	const d1 = p1.x - p2.x;
+	const d2 = p1.y - p2.y;
 	return Math.sqrt(d1 * d1 + d2 * d2);
 }
 
 function handleGameTick() {
-	var players = room.getPlayerList();
-	var ballPosition = room.getBallPosition();
-	var ballRadius = 10;
-	var playerRadius = 15;
-	var triggerDistance = ballRadius + playerRadius + 0.01;
+	const players = room.getPlayerList();
+	const ballPosition = room.getBallPosition();
+	const ballRadius = 10;
+	const playerRadius = 15;
+	const triggerDistance = ballRadius + playerRadius + 0.01;
 
-	for (var i = 0; i < players.length; i++) { // Iterate over all the players
-		var player = players[i];
-		if ( player.position == null ) continue; // Skip players that don't have a position
+	players.forEach((player) => { // Iterate over all the players
+		const player = players[i];
+		if (player.position == null) return; // Skip players that don't have a position
 
-		var distanceToBall = pointDistance(player.position, ballPosition);
-		var hadTouchedTheBall = playersThatTouchedTheBall.has(player.id);
+		const distanceToBall = pointDistance(player.position, ballPosition);
+		const hadTouchedTheBall = playersThatTouchedTheBall.has(player.id);
 
 		// This check is here so that the event is only notified the first game tick in which the player is touching the ball.
-		if ( !hadTouchedTheBall ) { 
-			if ( distanceToBall < triggerDistance ) {
+		if (!hadTouchedTheBall) { 
+			if (distanceToBall < triggerDistance) {
 				room.sendChat(player.name + " touched the ball");
 				playersThatTouchedTheBall.add(player.id);
 			}
-		}else{
+		} else {
 			// If a player that had touched the ball moves away from the ball remove him from the set to allow the event to be notified again.
-			if ( distanceToBall > triggerDistance + 4 ) {
+			if (distanceToBall > triggerDistance + 4) {
 				playersThatTouchedTheBall.delete(player.id);
 			}
 		}
-	}
+	})
 }
 
 function handleGameStart() {
