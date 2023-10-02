@@ -1,10 +1,6 @@
 // Use localStorage for save data
 
-var room = HBInit({
-	roomName: "My room",
-	maxPlayers: 16,
-	noPlayer: true
-});
+const room = HBInit({});
 
 let usersData = (getStorage("users") != null) ? getStorage("users") : {};
 
